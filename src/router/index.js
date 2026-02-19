@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import InspirationCards from '../pages/InspirationCards.vue'
 import ExcelExtract from '../pages/ExcelExtract.vue'
+import AccountFormatter from '../pages/AccountFormatter.vue'
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -9,6 +10,7 @@ export default createRouter({
     { path: '/', redirect: '/inspiration' },
     { path: '/inspiration', name: 'inspiration', component: InspirationCards },
     { path: '/excel', name: 'excel', component: ExcelExtract },
+    { path: '/account', name: 'account', component: AccountFormatter },
     { path: '/:pathMatch(.*)*', redirect: '/inspiration' },
   ],
   scrollBehavior() {

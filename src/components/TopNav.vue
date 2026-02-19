@@ -48,6 +48,14 @@ const NavIcons = {
         }),
       ]),
   },
+  Key: {
+    render: () =>
+      h('svg', { viewBox: '0 0 1024 1024', fill: 'currentColor' }, [
+        h('path', {
+          d: 'M352 544a192 192 0 1 1 154.9-305.3L928 240a32 32 0 0 1 0 64h-64v96a32 32 0 0 1-32 32h-64v64a32 32 0 0 1-32 32h-96a32 32 0 0 1-32-32v-30.4l-56.5-.2A191.4 191.4 0 0 1 352 544zm0-64a128 128 0 1 0 0-256 128 128 0 0 0 0 256z',
+        }),
+      ]),
+  },
 }
 
 const props = defineProps({
@@ -56,6 +64,7 @@ const props = defineProps({
     default: () => [
       { label: '灵感碎片', to: '/inspiration' },
       { label: 'Excel提取', to: '/excel' },
+      { label: '账号卡密', to: '/account' },
     ],
   },
   defaultTo: { type: String, default: '/inspiration' },
@@ -66,7 +75,13 @@ const navItems = computed(() =>
     ...i,
     icon:
       i.icon ??
-      (i.to === '/inspiration' ? NavIcons.Spark : i.to === '/excel' ? NavIcons.Table : undefined),
+      (i.to === '/inspiration'
+        ? NavIcons.Spark
+        : i.to === '/excel'
+          ? NavIcons.Table
+          : i.to === '/account'
+            ? NavIcons.Key
+            : undefined),
   }))
 )
 

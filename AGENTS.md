@@ -8,6 +8,7 @@
 - 全局样式集中在 `src/styles/global.css`：任何 UI/视觉修改优先在这里做；避免把同一套样式拆散到多个组件的 `scoped`/内联样式里，防止后续页面风格走样。
 - 不要随意改名/删除工具页布局相关 class（例如 `pane-card` / `excel-*` 等），它们依赖 `src/styles/global.css` 做统一皮肤与布局。
 - Element Plus 外观统一：优先复用现有 class（如 `dialog-input` / `mini-input` 等）+ 在 `src/styles/global.css` 里集中覆盖；避免在组件里写大量深层选择器去覆盖 `el-*` 内部结构。
+- 优先使用 Vue3/Element Plus 等成熟库/组件完成 UI 与交互，不要从零造轮子；仅在现有组件无法满足时才自定义实现。
 - 不要把 Vue/Element Plus 改回 CDN；依赖通过 `package.json` 管理。
 - 字体：允许在 `index.html` 通过 `<link>` 引入 `https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web/style.css`，并在 `src/styles/global.css` 里配置系统字体兜底（不要在组件里到处写 font-family）。
 - 本地数据存储 key：`fixed_notes_clean_v5`（不要轻易改动，避免用户数据丢失）。
@@ -21,6 +22,7 @@
 - `src/components/TopNav.vue`: 顶部导航栏（工具切换入口，保持各页一致）
 - `src/pages/InspirationCards.vue`: “灵感碎片”工具页（卡片列表、弹窗、拖拽、复制、导入导出）
 - `src/pages/ExcelExtract.vue`: Excel 内容提取/格式化工具页（监听 paste，解析剪贴板 HTML 表格）
+- `src/pages/AccountFormatter.vue`: 账号卡密格式化工具页（结果预览含 `2FA` / `2fa验证码` 列，点击 `2FA` 复制原值，点击 `2fa验证码` 生成并复制；含倒计时与休眠机制）
 - `src/styles/global.css`: 全局样式（包含 card 样式，必须保留）
 
 ## 统一风格约定（后续新增功能遵守）
