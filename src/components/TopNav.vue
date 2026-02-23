@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="header-bar">
     <div class="nav-left">
       <div class="brand" style="cursor: pointer" @click="goDefault">
@@ -56,6 +56,14 @@ const NavIcons = {
         }),
       ]),
   },
+  Text: {
+    render: () =>
+      h('svg', { viewBox: '0 0 1024 1024', fill: 'currentColor' }, [
+        h('path', {
+          d: 'M224 128h448a96 96 0 0 1 96 96v576a96 96 0 0 1-96 96H224a96 96 0 0 1-96-96V224a96 96 0 0 1 96-96zm0 64a32 32 0 0 0-32 32v576a32 32 0 0 0 32 32h448a32 32 0 0 0 32-32V224a32 32 0 0 0-32-32H224zm96 112h256a32 32 0 1 1 0 64H320a32 32 0 1 1 0-64zm0 160h256a32 32 0 1 1 0 64H320a32 32 0 1 1 0-64zm0 160h192a32 32 0 1 1 0 64H320a32 32 0 1 1 0-64z',
+        }),
+      ]),
+  },
 }
 
 const props = defineProps({
@@ -65,23 +73,26 @@ const props = defineProps({
       { label: '灵感碎片', to: '/inspiration' },
       { label: 'Excel提取', to: '/excel' },
       { label: '账号卡密', to: '/account' },
+      { label: '在线TXT', to: '/text' },
     ],
   },
   defaultTo: { type: String, default: '/inspiration' },
 })
 
 const navItems = computed(() =>
-  (props.items || []).map((i) => ({
-    ...i,
+  (props.items || []).map((item) => ({
+    ...item,
     icon:
-      i.icon ??
-      (i.to === '/inspiration'
+      item.icon ??
+      (item.to === '/inspiration'
         ? NavIcons.Spark
-        : i.to === '/excel'
+        : item.to === '/excel'
           ? NavIcons.Table
-          : i.to === '/account'
+          : item.to === '/account'
             ? NavIcons.Key
-            : undefined),
+            : item.to === '/text'
+              ? NavIcons.Text
+              : undefined),
   }))
 )
 
