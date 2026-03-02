@@ -167,7 +167,7 @@ export function useInspirationCards() {
     const d = new Date(timestamp)
     const isToday = new Date().toDateString() === d.toDateString()
     const timeStr = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`
-    return isToday ? `浠婂ぉ ${timeStr}` : `${d.getMonth() + 1}/${d.getDate()} ${timeStr}`
+    return isToday ? `今天 ${timeStr}` : `${d.getMonth() + 1}/${d.getDate()} ${timeStr}`
   }
   
   const triggerCopy = async (item) => {
@@ -211,7 +211,7 @@ export function useInspirationCards() {
   
   const saveItem = () => {
     if (!form.value.content) {
-      ElMessage.warning('鍐呭涓嶈兘涓虹┖')
+      ElMessage.warning('内容不能为空')
       return
     }
     const tagVal = form.value.tag ? form.value.tag.trim() : ''
@@ -225,9 +225,9 @@ export function useInspirationCards() {
   }
   
   const handleDelete = (item) => {
-    ElMessageBox.confirm('纭畾鍒犻櫎鍚楋紵', '鎻愮ず', {
-      confirmButtonText: '鍒犻櫎',
-      cancelButtonText: '鍙栨秷',
+    ElMessageBox.confirm('确定删除吗？', '提示', {
+      confirmButtonText: '删除',
+      cancelButtonText: '取消',
       type: 'warning',
       center: true,
     })
@@ -244,7 +244,7 @@ export function useInspirationCards() {
       })
       const a = document.createElement('a')
       a.href = URL.createObjectURL(blob)
-      a.download = `鐏垫劅纰庣墖_${new Date().toISOString().slice(0, 10)}.json`
+      a.download = `灵感碎片_${new Date().toISOString().slice(0, 10)}.json`
       a.click()
     } else if (c === 'import') document.getElementById('fileInput').click()
   }
@@ -256,9 +256,9 @@ export function useInspirationCards() {
     r.onload = (ev) => {
       try {
         tableData.value = JSON.parse(ev.target.result)
-        ElMessage.success('鎭㈠鎴愬姛')
+        ElMessage.success('恢复成功')
       } catch (err) {
-        ElMessage.error('鏂囦欢鏍煎紡閿欒')
+        ElMessage.error('文件格式错误')
       }
       e.target.value = ''
     }

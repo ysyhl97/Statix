@@ -9,11 +9,14 @@
   --text-shadow-sm: 0 10px 24px rgba(15, 23, 42, 0.07);
   --text-shadow-md: 0 20px 46px rgba(15, 23, 42, 0.13);
   --text-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  --text-max-width: 1680px;
   --text-accent: #0a84ff;
   --text-accent-soft: rgba(10, 132, 255, 0.16);
   --text-accent-strong: #007aff;
   --text-danger-soft: rgba(239, 68, 68, 0.18);
   --text-muted: #64748b;
+  --text-scrollbar-thumb: rgba(148, 163, 184, 0.46);
+  --text-scrollbar-thumb-hover: rgba(100, 116, 139, 0.66);
   position: relative;
   isolation: isolate;
 }
@@ -159,6 +162,17 @@
     inset 0 -1px 0 rgba(148, 163, 184, 0.12),
     var(--text-shadow-sm);
   overflow: hidden;
+  transition: border-color 0.18s ease, box-shadow 0.2s ease;
+}
+
+.text-editor-shell:focus-within {
+  border-color: rgba(10, 132, 255, 0.54);
+  box-shadow:
+    0 0 0 1px rgba(10, 132, 255, 0.2),
+    0 18px 44px rgba(10, 132, 255, 0.12),
+    var(--text-inset-highlight),
+    inset 0 -1px 0 rgba(148, 163, 184, 0.12),
+    var(--text-shadow-sm);
 }
 
 .text-editor-shell-head {
@@ -610,6 +624,7 @@
   margin-right: 0;
   padding: 18px 22px 8px;
   border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  background: linear-gradient(180deg, rgba(250, 252, 255, 0.92), rgba(244, 248, 253, 0.84));
 }
 
 .text-config-dialog .el-dialog__title {
@@ -635,6 +650,17 @@
 .text-subtitle {
   margin-top: 6px;
   margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.text-subtitle::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.22), rgba(148, 163, 184, 0));
+  opacity: 0.9;
 }
 
 .text-action-grid {
@@ -747,15 +773,95 @@
     flex-direction: column;
   }
 
+  .app-wrapper.text-page .header-bar {
+    width: 100%;
+    max-width: min(var(--text-max-width), 100%);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .app-wrapper.text-page .text-layout {
     flex: 1;
     min-height: 0;
     overflow: hidden;
+    width: 100%;
+    max-width: min(var(--text-max-width), 100%);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .app-wrapper.text-page .text-editor-card {
     flex: 1;
     min-height: 0;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.84);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.88), rgba(243, 248, 252, 0.74));
+    box-shadow:
+      var(--text-inset-highlight),
+      0 0 0 1px rgba(15, 23, 42, 0.03),
+      0 26px 64px rgba(15, 23, 42, 0.14);
+  }
+
+  .text-editor-wrap {
+    background:
+      repeating-linear-gradient(
+        180deg,
+        rgba(148, 163, 184, 0.04) 0,
+        rgba(148, 163, 184, 0.04) 1px,
+        rgba(0, 0, 0, 0) 1px,
+        rgba(0, 0, 0, 0) var(--text-editor-line-height, 28px)
+      ),
+      radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.024) 1px, rgba(0, 0, 0, 0) 1.2px),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(246, 249, 253, 0.44));
+    background-size: auto, 22px 22px, auto;
+  }
+
+  .text-textarea .el-textarea__inner,
+  .text-config-body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-scrollbar-thumb) transparent;
+  }
+
+  .text-textarea .el-textarea__inner::-webkit-scrollbar,
+  .text-config-body::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .text-textarea .el-textarea__inner::-webkit-scrollbar-track,
+  .text-config-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .text-textarea .el-textarea__inner::-webkit-scrollbar-thumb,
+  .text-config-body::-webkit-scrollbar-thumb {
+    background: var(--text-scrollbar-thumb);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  .text-textarea .el-textarea__inner::-webkit-scrollbar-thumb:hover,
+  .text-config-body::-webkit-scrollbar-thumb:hover {
+    background: var(--text-scrollbar-thumb-hover);
+    background-clip: content-box;
+  }
+
+  .text-line-gutter:hover::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .text-line-gutter:hover::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.38);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  .text-line-gutter:hover::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 116, 139, 0.55);
+    background-clip: content-box;
   }
 }
 
@@ -840,6 +946,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .text-editor-card,
+  .text-editor-shell,
   .text-head-actions .text-action-btn.el-button,
   .text-tabs.el-tabs--card > .el-tabs__header .el-tabs__item,
   .text-tabs.el-tabs--card > .el-tabs__header .el-tabs__new-tab {

@@ -102,7 +102,7 @@
   --account-otp-notch-shadow: 0 4px 10px rgba(37, 99, 235, 0.14);
   --account-otp-glass-blur: blur(8px) saturate(148%);
 
-  /* --- 1. 鍏ㄥ眬瀛椾綋璁剧疆 (鎸変綘瑕佹眰鐨勯『搴? --- */
+  /* --- 1. 全局字体设置 (按你要求的顺序) --- */
   /* LXGW WenKai Screen (Webfont) -> system fonts */
   --font-stack-cjk: "LXGW WenKai Screen", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
     system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -137,7 +137,7 @@ body {
   background-position: 0 0, 0 0, 0 0, 100% 0, 50% 100%, 0 0;
 }
 
-/* 寮哄埗瑕嗙洊 Element Plus 榛樿瀛椾綋 */
+/* 强制覆盖 Element Plus 默认字体 */
 .el-input__inner,
 .el-textarea__inner,
 .el-button,
@@ -340,7 +340,7 @@ body {
   line-height: 48px !important;
 }
 
-/* 纭繚娓呴櫎鎸夐挳鍨傜洿灞呬腑 */
+/* 确保清除按钮垂直居中 */
 .custom-search .el-input__suffix {
   display: flex;
   align-items: center;

@@ -282,7 +282,7 @@ export function useExcelExtractor() {
     if (!parsed.length) {
       tableData.value = []
       parseSource.value = ''
-      ElMessage.warning('鏈瘑鍒埌琛ㄦ牸鍐呭')
+      ElMessage.warning('未识别到表格内容')
       return
     }
   
@@ -304,7 +304,7 @@ export function useExcelExtractor() {
   const copyText = async (txt, okMsg) => {
     const text = String(txt ?? '')
     if (!text) {
-      ElMessage.warning('娌℃湁鍙鍒剁殑鍐呭')
+      ElMessage.warning('没有可复制的内容')
       return false
     }
   
@@ -331,7 +331,7 @@ export function useExcelExtractor() {
   const handleOutputClick = async (evt) => {
     const txt = outputText.value
     if (!txt) {
-      ElMessage.warning('娌℃湁鍙鍒剁殑鍐呭')
+      ElMessage.warning('没有可复制的内容')
       return
     }
   
@@ -341,7 +341,7 @@ export function useExcelExtractor() {
   const downloadResult = () => {
     const txt = outputText.value
     if (!txt) {
-      ElMessage.warning('娌℃湁鍙笅杞界殑鍐呭')
+      ElMessage.warning('没有可下载的内容')
       return
     }
   

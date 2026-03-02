@@ -145,17 +145,28 @@ export function useAccountFormatter() {
   const tableColumns = computed(() => {
     const baseCols = []
     const used = new Set()
+    const ALWAYS_VISIBLE_KEYS = new Set(['account', 'password'])
+    const rows = tableRows.value
+
+    const hasAnyValue = (key) => rows.some((row) => String(row?.[key] ?? '').trim())
+    const shouldShowBuiltinCol = (key) => {
+      if (!rows.length) return true
+      if (ALWAYS_VISIBLE_KEYS.has(key)) return true
+      return hasAnyValue(key)
+    }
 
     const builtinOrder = DEFAULT_FIELD_ORDER.filter((key) => key !== 'ignore')
     builtinOrder.forEach((key) => {
-      if (key === 'ignore' || used.has(key)) return
+      if (!key || key === 'ignore' || used.has(key)) return
+      if (!builtinColumns[key]) return
+      if (!shouldShowBuiltinCol(key)) return
       used.add(key)
-      if (builtinColumns[key]) baseCols.push(builtinColumns[key])
+      baseCols.push(builtinColumns[key])
     })
 
     const appendIfHasValue = (key) => {
       if (!key || key === 'ignore' || used.has(key)) return
-      const hasValue = tableRows.value.some((row) => String(row[key] || '').trim())
+      const hasValue = hasAnyValue(key)
       if (!hasValue) return
       used.add(key)
       baseCols.push({ key, label: roleLabelForKey(key), minWidth: 180 })

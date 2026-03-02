@@ -723,7 +723,7 @@
 }
 
 .excel-output-wrap::after {
-  content: "鐐瑰嚮澶嶅埗鍏ㄩ儴";
+  content: "点击复制全部";
   position: absolute;
   top: 10px;
   right: 12px;
@@ -741,7 +741,7 @@
 }
 
 .excel-output-wrap.is-empty::after {
-  content: "鏆傛棤缁撴灉";
+  content: "暂无结果";
 }
 
 .excel-output-wrap.is-empty .el-textarea__inner {
